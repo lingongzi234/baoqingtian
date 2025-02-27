@@ -1,0 +1,75 @@
+server.port: 8081
+spring:
+  redis:
+    host: 106.3.99.64
+    port: 20022
+    password: 91ieduroot
+    database: 1
+    timeout: 3000
+  application:
+    name: gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.3.99.64:20026
+        username: tjpu22t01
+        password: tjpu22t01
+        namespace: tjpu22t01
+        enabled: true
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns:
+              - "*"
+            allowed-headers:
+              - "*"
+            allowed-methods:
+              - "*"
+            allow-credentials: true
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: sca-custom
+          uri: lb://sca-custom
+          predicates:
+            - Path=/custom/**
+          filters:
+            - StripPrefix=1
+        - id: dataAnalyze
+          uri: lb://data-analyze
+          predicates:
+            - Path=/dataAnalyze/**
+          filters:
+            - StripPrefix=1
+        - id: sca-ls
+          uri: lb://sca-ls
+          predicates:
+            - Path=/ls/**
+          filters:
+            - StripPrefix=1
+        - id: sca-ywl
+          uri: lb://sca-ywl
+          predicates:
+            - Path=/ywl/**
+          filters:
+            - StripPrefix=1
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.3.99.64:20021/tjpu22t01
+    username: tjpu22t01
+    password: tjpu22t01
+sa-token:
+  active-timeout: -1
+  token-name: baoqingtian
+  timeout: 2592000
+  is-share: true
+  is-log: true
+  token-style: uuid
+  jwt-secret-key: baoqingtian

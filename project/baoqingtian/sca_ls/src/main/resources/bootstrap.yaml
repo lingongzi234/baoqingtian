@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: sca-ls
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.3.99.64:20026
+        username: tjpu22t01
+        password: tjpu22t01
+        namespace: tjpu22t01
+        enabled: true
+    inetutils:
+      preferred-networks:
+        - 26.6.*.*
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://106.3.99.64:20021/tjpu22t01
+    username: tjpu22t01
+    password: tjpu22t01
+  profiles:
+    active: dev
